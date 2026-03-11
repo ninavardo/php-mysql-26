@@ -1,0 +1,15 @@
+form{
+    width:700px;
+    margin: auto;
+    padding:20px;
+    border: solid black 1px;
+    padding: 15px;
+}
+
+.result{
+    width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: solid black 2px;
+    background-color: antiquewhite;
+}
