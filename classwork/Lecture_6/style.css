@@ -1,6 +1,11 @@
-form{
+form, .content{
     width: 500px;
     padding: 20px;
     margin: auto;
     border: solid 2px;
+}
+
+.content{
+    min-height: 200px;
+    background-color: pink;
 }

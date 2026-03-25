@@ -22,5 +22,19 @@
     <br><br>
     <button>Write to File</button>
 </form>
+<hr>
+    <div class="content">
+        <h1>List of Files1</h1>
+        <?php 
+            $d = scandir("files1");
+            // echo "<pre>";
+            // print_r($d);
+            // echo "</pre>";
+
+            for($i=2; $i<count($d); $i++){
+                echo "<p>$d[$i]</p>";
+            }
+        ?>
+    </div>
 </body>
-</html>
+</html
