@@ -8,5 +8,4 @@
     $file = "files/".$file;
     echo $file;
 
-    fopen($file, "w");
-?>
+    fopen($file, "w"); 
