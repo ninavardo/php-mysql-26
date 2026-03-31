@@ -1,8 +1,5 @@
 <?php
 
-    echo "<pre>";
-    print_r($_GET);
-    echo "</pre>";
 
     $file = $_GET['filename'];
     $content = $_GET['content'];
