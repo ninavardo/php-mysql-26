@@ -18,10 +18,6 @@
         Subject: <input type="text" name="subject"><br><br>
         Grade (0-100): <input type="number" name="score"><br><br>
         Lecturer First Name: <input type="text" name="lecturer_first"><br><br>
-        Lecturer Last Name: <input type="text" name="lecturer_last"><br><br>
-        Dean First Name: <input type="text" name="dean_first"><br><br>
-        Dean Last Name: <input type="text" name="dean_last"><br><br>
-
         <input type="submit" value="Submit">
     </form>
 
@@ -33,10 +29,7 @@
     $subject = $_POST['subject'];
     $score = (int) $_POST['score'];
     $lecturerFirst = $_POST['lecturer_first'];
-    $lecturerLast = $_POST['lecturer_last'];
-    $deanFirst = $_POST['dean_first'];
-    $deanLast = $_POST['dean_last'];
-
+    
     if ($score >= 91) {
         $grade = "A — Excellent";
     } elseif ($score >= 81) {
@@ -56,7 +49,7 @@
 
     <h3>Results</h3>
 
-    <table border="1" cellpadding="5">
+    <table border="1">
         <tr>
             <th>Student</th>
             <th>Course</th>
@@ -65,7 +58,6 @@
             <th>Score</th>
             <th>Grade</th>
             <th>Lecturer</th>
-            <th>Dean</th>
         </tr>
 
         <tr>
@@ -75,8 +67,7 @@
             <td><?php echo $subject; ?></td>
             <td><?php echo $score; ?></td>
             <td><?php echo $grade; ?></td>
-            <td><?php echo $lecturerFirst . " " . $lecturerLast; ?></td>
-            <td><?php echo $deanFirst . " " . $deanLast; ?></td>
+            <td><?php echo $lecturerFirst ?></td>
         </tr>
     </table>
 

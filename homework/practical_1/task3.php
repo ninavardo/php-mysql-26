@@ -41,6 +41,7 @@
     </form>
 
     <?php
+    if(isset($_POST["Submit Test"])){
 
     $q1 = $_POST['q1'];
     $q2 = $_POST['q2'];
@@ -62,16 +63,16 @@
         $score++;
     }
 
-    if (strtolower($q4) == "hypertext markup language") {
+    if ($q4== "hypertext markup language") {
         $score++;
     }
 
-    if (strtolower($q5) == "design") {
+    if ($q5 == "design") {
         $score++;
     }
 
     echo "<h3>Correct answers: $score / 5</h3>";
-
+    }   
     ?>
 
 </body>
