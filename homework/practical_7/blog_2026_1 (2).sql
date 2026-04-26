@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2026 at 03:18 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Apr 22, 2026 at 08:56 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,52 +24,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Table structure for table `categorys`
 --
 
-CREATE TABLE `category` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `category_name` varchar(50) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `category`
---
-
-INSERT INTO `category` (`id`, `category_name`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'work', '2026-04-19 13:12:19', NULL, NULL),
-(2, 'travel', '2026-04-19 13:12:19', NULL, NULL),
-(3, 'gaming', '2026-04-19 13:12:19', NULL, NULL);
+CREATE TABLE `categorys` (
+  `id` int(4) UNSIGNED NOT NULL,
+  `name` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `comments`
+-- Table structure for table `commetns`
 --
 
-CREATE TABLE `comments` (
-  `id` int(11) NOT NULL,
-  `posts_id` int(4) UNSIGNED NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `caption` varchar(1000) NOT NULL,
-  `react` varchar(1000) NOT NULL,
-  `reply` varchar(100) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updated_ed` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `posts_id`, `name`, `caption`, `react`, `reply`, `created_at`, `updated_ed`, `deleted_at`) VALUES
-(7, 2, 'lia', 'ra lamazi xedia!!', '15', '2', '2026-04-19 13:17:06', NULL, NULL),
-(8, 1, 'giorgi', 'ra girs?', '2', '1', '2026-04-19 13:17:06', NULL, NULL),
-(9, 3, 'nuca', 'dainteresebuli var', '1', '1', '2026-04-19 13:17:06', NULL, NULL);
+CREATE TABLE `commetns` (
+  `id` int(11) UNSIGNED NOT NULL,
+  `post_id` int(11) UNSIGNED NOT NULL,
+  `user_id` int(11) UNSIGNED DEFAULT NULL,
+  `comment` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -78,25 +53,14 @@ INSERT INTO `comments` (`id`, `posts_id`, `name`, `caption`, `react`, `reply`, `
 --
 
 CREATE TABLE `posts` (
-  `id` int(4) UNSIGNED NOT NULL,
-  `users_id` int(11) UNSIGNED DEFAULT NULL,
-  `category_id` int(11) UNSIGNED NOT NULL,
-  `caption` varchar(1000) NOT NULL,
-  `likes` varchar(10000) NOT NULL,
-  `comments` varchar(1000) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp(),
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `posts`
---
-
-INSERT INTO `posts` (`id`, `users_id`, `category_id`, `caption`, `likes`, `comments`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 3, 'laptop', '25', '2', '2026-04-19 13:16:00', NULL, NULL),
-(2, 5, 2, 'kazbebi', '101', '3', '2026-04-19 13:16:00', NULL, NULL),
-(3, 4, 1, 'vakansia', '55', '4', '2026-04-19 13:16:00', NULL, NULL);
+  `id` int(11) UNSIGNED NOT NULL,
+  `category_id` int(4) UNSIGNED NOT NULL,
+  `user_id` int(9) UNSIGNED NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `text` text NOT NULL,
+  `img_url` varchar(200) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -110,7 +74,7 @@ CREATE TABLE `roles` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `roles`
@@ -139,7 +103,7 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -157,25 +121,26 @@ INSERT INTO `users` (`id`, `role_id`, `email`, `password`, `name`, `lastname`, `
 --
 
 --
--- Indexes for table `category`
+-- Indexes for table `categorys`
 --
-ALTER TABLE `category`
+ALTER TABLE `categorys`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `comments`
+-- Indexes for table `commetns`
 --
-ALTER TABLE `comments`
+ALTER TABLE `commetns`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `posts_id` (`posts_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `post_id` (`post_id`);
 
 --
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_users_post` (`users_id`),
-  ADD KEY `category_id` (`category_id`);
+  ADD KEY `category_id` (`category_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `roles`
@@ -195,22 +160,22 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `category`
+-- AUTO_INCREMENT for table `categorys`
 --
-ALTER TABLE `category`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `categorys`
+  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `comments`
+-- AUTO_INCREMENT for table `commetns`
 --
-ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+ALTER TABLE `commetns`
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -229,18 +194,18 @@ ALTER TABLE `users`
 --
 
 --
--- Constraints for table `comments`
+-- Constraints for table `commetns`
 --
-ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`posts_id`) REFERENCES `posts` (`id`);
+ALTER TABLE `commetns`
+  ADD CONSTRAINT `commetns_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE SET NULL ON UPDATE SET NULL,
+  ADD CONSTRAINT `commetns_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `posts`
 --
 ALTER TABLE `posts`
-  ADD CONSTRAINT `fk_users_post` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`);
+  ADD CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categorys` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `posts_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `users`
