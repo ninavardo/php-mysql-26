@@ -1,0 +1,17 @@
+table{
+    border: solid 1px black;
+    border-collapse: collapse;
+    margin: auto;
+}
+
+table td, th {
+    border: solid 1px black;
+    padding: 8px;
+}
+
+form{
+    width: 300px;
+    border: solid 1px black;
+    margin: auto;
+    padding: 10px;
+}
